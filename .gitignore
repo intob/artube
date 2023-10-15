@@ -14,5 +14,4 @@ logs
 
 # Other
 /node_modules/
-/dist/
-env.js
+yarn.lock

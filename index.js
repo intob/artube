@@ -1,6 +1,20 @@
 import { connectWallet } from "./util/wallet.js"
 
-window.arweave = window.Arweave.init()
+let gateway = {
+  protocol: "https",
+  host: "arweave.net",
+  port: 443
+}
+
+if (window.arweaveWallet) {
+  try {
+    gateway = await window.arweaveWallet.getArweaveConfig() || gateway
+  } catch (e){
+    console.log("failed to get wallet config, using default gateway")
+  }
+}
+
+window.arweave = window.Arweave.init(gateway)
 
 export const routes = [
   {

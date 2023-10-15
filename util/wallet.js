@@ -10,10 +10,14 @@ export async function connectWallet() {
     return
   }
   await window.arweaveWallet.connect(
-    [ "ACCESS_ADDRESS", "SIGN_TRANSACTION", "DISPATCH" ],
+    [
+      "ACCESS_ADDRESS",
+      "ACCESS_ARWEAVE_CONFIG",
+      "SIGN_TRANSACTION",
+      "DISPATCH"
+    ],
     {
-      name: "ArTube",
-      logo: "https://arweave.net/jAvd7Z1CBd8gVF2D6ESj7SMCCUYxDX_z3vpp5aHdaYk"
+      name: "ArTube"
     }
   )
   Toast.notify("Wallet connected")

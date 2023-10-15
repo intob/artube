@@ -14,7 +14,6 @@ class Browse extends LitElement {
   async connectedCallback() {
     super.connectedCallback()
     this.videos = await getVideos()
-    console.log(this.videos)
   }
 
   render() {
