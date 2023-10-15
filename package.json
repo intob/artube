@@ -9,13 +9,10 @@
     "lint": "eslint components/* util/*"
   },
   "dependencies": {
-    "arweave": "latest",
     "lit": "latest"
   },
   "devDependencies": {
     "@web/dev-server": "latest",
-    "eslint": "latest",
-    "testweave-sdk": "latest",
-    "esbuild": "latest"
+    "eslint": "latest"
   }
 }
