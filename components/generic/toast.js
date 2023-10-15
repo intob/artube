@@ -47,11 +47,11 @@ export class Toast extends LitElement {
     }
 
     a {
-      border: 2px solid var(--button-border-color);
+      border: 2px solid var(--accent-light-color-1);
       border-radius: 5px;
       background: var(--background-gradient);
       cursor: pointer;
-      color: var(--button-font-color);
+      color: var(--light-color-2);
       display: flex;
       flex-flow: row;
       align-items: center;
@@ -65,7 +65,7 @@ export class Toast extends LitElement {
 
     a:hover {
       background-color: var(--signal-color-1);
-      color: var(--button-hover-font-color);
+      color: var(--light-color-2);
     }
     `
   ]

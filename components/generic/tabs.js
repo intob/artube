@@ -10,7 +10,7 @@ class Tabs extends LitElement {
       border: 2px solid transparent;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      color: var(--tab-font-color);
+      color: var(--light-color-3);
       cursor: pointer;
       flex: 1 1 auto;
       margin-bottom: -2px;
@@ -19,13 +19,13 @@ class Tabs extends LitElement {
     }
 
     nav > ::slotted([slot="tab"]:hover) {
-      background-color: var(--tab-hover-background-color);
-      color: var(--tab-hover-font-color);
+      background-color: var(--lighten-color-1);
+      color: var(--light-color-1);
       transition: all 200ms linear;
     }
 
     nav > ::slotted([slot="tab"][selected]) {
-      background-color: var(--tab-hover-background-color);
+      background-color: var(--lighten-color-1);
       border-bottom-color: transparent;
       transition: all 200ms ease;
     }
@@ -35,7 +35,7 @@ class Tabs extends LitElement {
     }
 
     ::slotted([slot="panel"]) {
-      background-color: var(--panel-background-color);
+      background-color: var(--lighten-color-1);
       display: none;
       justify-content: center;
       min-height: 300px;

@@ -9,10 +9,10 @@ class Textarea extends LitElement {
     box-sizing: border-box;
     font-size: 1em;
     font-family: sans-serif;
-    background-color: var(--input-background-color);
-    color: var(--input-font-color);
+    background-color: var(--dark-color);
+    color: var(--light-color-2);
     transition: background-color 200ms;
-    border: 1px solid var(--input-border-color);
+    border: 1px solid var(--accent-light-color-1);
     border-radius: 5px;
     max-width: 100%;
     min-width: 100%;
@@ -21,8 +21,8 @@ class Textarea extends LitElement {
   }
   
   textarea:hover:not(:focus) {
-    border-color: var(--input-hover-border-color);
-    color: var(--input-hover-font-color);
+    border-color: var(--light-color-1);
+    color: var(--light-color-2);
   }
 
   textarea:focus {

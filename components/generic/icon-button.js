@@ -7,11 +7,11 @@ class IconButton extends Button {
     ...super.styles,
     css`
     button svg {
-      fill: var(--button-font-color);
+      fill: var(--light-color-2);
     }
 
     button:hover svg {
-      fill: var(--button-hover-font-color);
+      fill: var(--light-color-2);
     }
 
     button[disabled] svg, button[disabled]:hover svg {

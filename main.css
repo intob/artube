@@ -1,7 +1,6 @@
 :root {
-  /* Basic themeing */
-  --dark-color: #070707;
-  --dark-color2: #383838;
+  --dark-color: #0C0910;
+  --dark-color2: #1D1627;
   --light-color-1: #efefef;
   --light-color-2: #e3e3e3;
   --light-color-3: #c8c8c8;
@@ -14,58 +13,13 @@
   --darken-color-1: rgba(0,0,0,.1);
   --darken-color-2: rgba(0,0,0,.4);
   --darken-color-3: rgba(0,0,0,.9);
-  --signal-color-1: #801ae6;
-  --signal-color-2: #a21ae6;
-  --signal-gradient: linear-gradient(76.35deg,var(--signal-color-1) 15.89%,var(--signal-color-2) 89.75%);
-  --status-done-color: #008f00;
-  --status-error-color: #d41f42;
-  --status-font-color: #ffffff;
+  --signal-color-1: #2F52E0;
+  --signal-color-2: #F24236;
+  --background-gradient: linear-gradient(.25turn, var(--dark-color), var(--dark-color2))
 }
   
 html, body {
   margin: 0;
-}
-
-html{
-  --background-gradient: linear-gradient(327.21deg, rgba(33, 0, 75, 0.24) 3.65%, rgba(60, 0, 136, 0) 40.32%), linear-gradient(245.93deg, rgba(209, 21, 111, 0.16) 0%, rgba(209, 25, 80, 0) 36.63%), linear-gradient(147.6deg, rgba(58, 19, 255, 0) 29.79%, rgba(98, 19, 255, 0.01) 85.72%), #13111C;
-  /* Elements themeing */
-  --body-background-color: var(--dark-color);
-  --body-hover-font-color: var(--accent-light-color-1);
-  --body-font-color: var(--light-color-2);
-  --content-background-color: var(--lighten-color-1);
-  --content-border-color: var(--accent-light-color-1);
-  --content-font-color: var(--light-color-2);
-  --card-background-color: var(--lighten-color-1);
-  --card-font-color: var(--light-color-2);
-  --card-icon-color: var(--light-color-1);
-  --card-hover-background-color: var(--darken-color-1);
-  --card-hover-border-color: var(--accent-light-color-1);
-  --input-background-color: var(--dark-color);
-  --input-border-color: var(--accent-light-color-1);
-  --input-font-color: var(--light-color-2);
-  --input-hover-border-color: var(--light-color-1);
-  --input-focus-border-color: var(--signal-color-1);
-  --input-hover-font-color: var(--light-color-2);
-  --output-background-color: var(--dark-color);
-  --output-border-color: var(--accent-light-color-1);
-  --output-font-color: var(--light-color-2);
-  --button-background-color: var(--dark-color);
-  --button-border-color: var(--accent-light-color-1);
-  --button-font-color: var(--light-color-2);
-  --button-hover-background-color: var(--signal-color-1);
-  --button-hover-border-color: var(--accent-light-color-1);
-  --button-hover-font-color: var(--light-color-2);
-  --tab-background-color: var(--darken-color-1);
-  --tab-font-color: var(--light-color-3);
-  --tab-hover-background-color: var(--lighten-color-1);
-  --tab-hover-font-color: var(--light-color-1);
-  --panel-background-color: var(--lighten-color-1);
-  --active-background-color: var(--signal-color-1);
-  --active-border-color: var(--accent-light-color-1);
-  --disabled-background-color: var(--light-color-3);
-  --disabled-border-color: var(--accent-light-color-1);
-  --disabled-font-color: var(--light-color-4);
-  --dimmed-font-color: var(--light-color-4);
 }
 
 body {
@@ -75,7 +29,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: sans-serif;
-  color: var(--body-font-color);
+  color: var(--light-color-2);
   background: var(--background-gradient);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -85,7 +39,7 @@ body {
 }
 
 x-router {
-  color: var(--content-font-color);
+  color: var(--light-color-2);
 }
 
 x-loader {

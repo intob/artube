@@ -20,7 +20,7 @@ export class Loader extends LitElement {
 
     .progress {
       height: 5px;
-      background-color: var(--body-font-color);
+      background-color: var(--light-color-2);
       transition: width 300ms;
     }
     `

@@ -14,11 +14,11 @@ class NavDropdown extends LitElement {
   slot[name="parent"] {
     display: block;
     padding: 10px 20px;
-    color: var(--dimmed-font-color);
+    color: var(--light-color-4);
   }
 
   slot[name="parent"]:hover {
-    color: var(--body-font-color);;
+    color: var(--light-color-2);;
   }
 
   div slot[name="child"] {

@@ -4,8 +4,8 @@ class Card extends LitElement {
   static styles = css`
   :host {
     display: block;
-    background-color: var(--card-background-color);
-    color: var(--card-font-color);
+    background-color: var(--lighten-color-1);
+    color: var(--light-color-2);
     box-sizing: border-box;
     border-radius: 10px;
     width: 100%;

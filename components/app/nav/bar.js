@@ -37,12 +37,12 @@ class NavBar extends LitElement {
     }
 
     x-link svg {
-      fill: var(--dimmed-font-color);
+      fill: var(--light-color-4);
       transition: fill 300ms;
     }
 
     x-link:hover svg {
-      fill: var(--body-font-color);
+      fill: var(--light-color-2);
     }
     `
   ]

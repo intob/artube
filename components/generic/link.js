@@ -11,14 +11,14 @@ class Link extends LitElement {
   a {
     text-decoration: none;
     transition: color 200ms;
-    color: var(--dimmed-font-color);
+    color: var(--light-color-4);
     display: flex;
     align-items: center;
     gap: 5px;
   }
 
   a:hover {
-    color: var(--body-font-color);
+    color: var(--light-color-2);
   }
   `
 
