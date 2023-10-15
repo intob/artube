@@ -1,0 +1,18 @@
+# System
+.DS_Store
+
+# Logs
+yarn-debug.log*
+yarn-error.log*
+logs
+
+# Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+
+# Other
+/node_modules/
+/dist/
+env.js
