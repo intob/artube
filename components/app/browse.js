@@ -33,7 +33,7 @@ class Browse extends LitElement {
 
   renderTeaser(v) {
     return html`
-      <at-teaser videotxid=${v.id} channeladdress=${v.owner.address}></at-teaser>
+      <at-teaser videotxid=${v.id} address=${v.owner.address}></at-teaser>
     `
   }
 }

@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit"
 import { getChannelAvatarTxId, getChannelTxId } from "../../util/query/channel.js"
-import { getVideoMetadataTx, getVideoPosterTxId } from "../../util/query/video.js"
+import { getVideoMetadataTxId, getVideoPosterTxId } from "../../util/query/video.js"
 import { buildDataUrl, fetchData } from "../../util/gateway/data.js"
 
 class Teaser extends LitElement {
@@ -14,7 +14,7 @@ class Teaser extends LitElement {
     videotxid: { attribute: true },
     metadata: {},
     posterUrl: {},
-    channeladdress: { attribute: true },
+    address: { attribute: true },
     channel: {},
     avatarUrl: {}
   }
@@ -78,18 +78,18 @@ class Teaser extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback()
-    const metadataTx = await getVideoMetadataTx(this.videotxid)
-    if (!metadataTx) {
+    const metadataTxId = await getVideoMetadataTxId(this.address, this.videotxid)
+    if (!metadataTxId) {
       return
     }
-    this.metadata = await (await fetchData(metadataTx.id)).json()
-    const posterTxId = await getVideoPosterTxId(this.videotxid)
+    this.metadata = await (await fetchData(metadataTxId)).json()
+    const posterTxId = await getVideoPosterTxId(this.address, this.videotxid)
     if (posterTxId) {
       this.posterUrl = buildDataUrl(posterTxId)
     }
-    if (this.channeladdress) {
+    if (this.address) {
       this.channel = await this.getChannel()
-      const avatarTxId = await getChannelAvatarTxId(metadataTx.owner.address)
+      const avatarTxId = await getChannelAvatarTxId(this.address)
       if (avatarTxId) {
         this.avatarUrl = buildDataUrl(avatarTxId)
       }
@@ -118,7 +118,7 @@ class Teaser extends LitElement {
   }
 
   async getChannel() {
-    const channelTxId = await getChannelTxId(this.channeladdress)
+    const channelTxId = await getChannelTxId(this.address)
     if (!channelTxId) {
       console.log("no channel found")
       return

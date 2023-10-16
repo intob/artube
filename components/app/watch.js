@@ -1,5 +1,9 @@
 import { LitElement, css, html } from "lit"
-import { getVideoMetadataTx, getVideoPosterTxId } from "../../util/query/video.js"
+import {
+  getVideoMetadataTxId,
+  getVideoPosterTxId,
+  getVideoTx
+} from "../../util/query/video.js"
 import { buildDataUrl, fetchData } from "../../util/gateway/data.js"
 import { getChannelAvatarTxId, getChannelTxId } from "../../util/query/channel.js"
 
@@ -9,7 +13,7 @@ class Watch extends LitElement {
     this.posterUrl = ""
     this.videoUrl = ""
     this.avatarUrl = ""
-    this.channelAddress = ""
+    this.address = ""
   }
 
   static properties = {
@@ -49,11 +53,12 @@ class Watch extends LitElement {
   async connectedCallback() {
     super.connectedCallback()
     this.videoUrl = buildDataUrl(this.videotxid)
-    const posterTxId = await getVideoPosterTxId(this.videotxid)
+    const videoTx = await getVideoTx(this.videotxid)
+    this.address = videoTx.owner.address
+    const posterTxId = await getVideoPosterTxId(this.address, this.videotxid)
     this.posterUrl = buildDataUrl(posterTxId)
-    const metadataTx = await getVideoMetadataTx(this.videotxid)
-    this.metadata = await (await fetchData(metadataTx.id)).json()
-    this.address = metadataTx.owner.address
+    const metadataTxId = await getVideoMetadataTxId(this.address, this.videotxid)
+    this.metadata = await (await fetchData(metadataTxId)).json()
     const channelTxId = await getChannelTxId(this.address)
     this.channel = await (await fetchData(channelTxId)).json()
     const avatarTxId = await getChannelAvatarTxId(this.address)
