@@ -80,6 +80,7 @@ class NavBar extends LitElement {
       </x-link>
       <x-link href="#/">Home</x-link>
       <x-link href="#/channel/${this.walletAddress||""}" ?hidden=${!this.walletAddress}>My channel</x-link>
+      <x-link href="#/what">ar what?</x-link>
     </div>
     <div class="right">
       ${this.renderConnection()}

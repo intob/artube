@@ -75,6 +75,11 @@ export const routes = [
     action: async() => await import("./components/app/watch.js")
   },
   {
+    path: "what",
+    component: "at-what",
+    action: async() => await import("./components/app/what.js")
+  },
+  {
     path: "no-wallet",
     component: "at-no-wallet",
     action: async() => await import("./components/app/no-wallet.js")

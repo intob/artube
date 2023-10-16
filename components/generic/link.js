@@ -11,8 +11,8 @@ class Link extends LitElement {
   a {
     text-decoration: none;
     transition: color 200ms;
-    color: var(--light-color-4);
-    display: flex;
+    color: var(--light-color-3);
+    display: inline-flex;
     align-items: center;
     gap: 5px;
   }
