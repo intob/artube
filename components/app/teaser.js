@@ -98,8 +98,10 @@ class Teaser extends LitElement {
 
   render() {
     if (!this.metadata || this.posterUrl === "") {
+      this.hidden = true
       return
     }
+    this.hidden = false
     return html`
     <x-card @click=${() => window.location = `#/watch/${this.videotxid}`}>
       <img src=${this.posterUrl} class="poster"/>
