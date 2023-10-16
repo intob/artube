@@ -18,6 +18,10 @@ class Upload extends LitElement {
     gap: 10px;
   }
 
+  p {
+    width: 100%;
+  }
+
   .confirm {
     flex-direction: column;
     min-width: 250px;
@@ -42,9 +46,10 @@ class Upload extends LitElement {
     align-self: end;
   }
 
-  @media(max-width:700px) {
+  @media(max-width:800px) {
     :host {
       flex-wrap: wrap;
+      justify-content: end;
     }
   }
   `
@@ -105,6 +110,7 @@ class Upload extends LitElement {
     return html`
     <x-card class="file">
       <h2>Video file</h2>
+      <p>Ensure that your video is the desired resolution & quality. You can use ffmpeg to convert & compress the file. 4K @ 30fps with CRF of 26 is recommended.</p>
       <file-input icon="video-file" accept="video/mp4" @change=${this.handleVideoFileChange}></file-input>
       ${this.renderVideoFilePreview()}
     </x-card>
@@ -125,6 +131,7 @@ class Upload extends LitElement {
     return html`
     <x-card class="file">
       <h2>Poster image</h2>
+      <p>Use a jpg or webp. Ideally, the image should be of the same dimensions as the video.</p>
       <file-input icon="image" accept="image/jpg,image/png,image/webp" @change=${this.handlePosterFileChange}></file-input>
       ${this.renderPosterFilePreview()}
     </x-card>

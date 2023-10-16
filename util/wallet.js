@@ -12,11 +12,7 @@ export async function disconnectWallet() {
 
 export async function connectWallet() {
   if (!window.arweaveWallet) {
-    Toast.notify("You need an Arweave wallet", {
-      msg: "Install a wallet browser extension",
-      linkUrl: "https://www.arconnect.io/download",
-      linkLabel: "Download ArConnect"
-    })
+    window.location = "#/no-wallet"
     return
   }
   await window.arweaveWallet.connect(

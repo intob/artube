@@ -112,7 +112,10 @@ class Channel extends LitElement {
       <h1>${this.channel.name}</h1>
       <text-input placeholder="Channel Name" @input=${this.handleNameChange} .value=${this.channel.name}></text-input>
       <text-input placeholder="Channel description" @input=${this.handleDescriptionChange} .value=${this.channel.description}></text-input>
-      <x-button @click=${this.save}>Save</x-button>
+      <div class="buttons">
+        <x-button @click=${this.cancel}>Cancel</x-button>
+        <x-button @click=${this.save}>Save</x-button>
+      </div>
     `
   }
 
@@ -126,10 +129,16 @@ class Channel extends LitElement {
     this.updatedChannel = { ...this.channel }
     this.editMode = true
   }
+
+  cancel() {
+    this.editMode = false
+    this.updatedChannel = { ...this.channel }
+    Toast.notify("Nothing changed")
+  }
   
   async save() {
     this.editMode = false
-    if (!confirm("Are you sure you want to update your channel?")) {
+    if (!confirm("Are you sure that you want to update your channel?")) {
       Toast.notify("Nothing changed")
       this.updatedChannel = { ...this.channel }
       return
