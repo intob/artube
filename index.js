@@ -1,4 +1,4 @@
-import { connectWallet } from "./util/wallet.js"
+import { connectWallet, disconnectWallet } from "./util/wallet.js"
 
 let gateway = {
   protocol: "https",
@@ -16,33 +16,6 @@ if (window.arweaveWallet) {
 
 window.arweave = window.Arweave.init(gateway)
 
-export const routes = [
-  {
-    path: "",
-    component: "at-browse",
-    action: async() => await import("./components/app/browse.js")
-  },
-  {
-    path: "connect-wallet",
-    action: connectWallet
-  },
-  {
-    path: "create-video",
-    component: "at-create-video",
-    action: async() => await import("./components/app/create-video.js")
-  },
-  {
-    path: "channel/:address",
-    component: "at-channel",
-    action: async() => await import("./components/app/channel.js")
-  },
-  {
-    path: "watch/:videotxid",
-    component: "at-watch",
-    action: async() => await import("./components/app/watch.js")
-  }
-]
-
 // persist route in session
 addEventListener("hashchange", e => {
   const route = new URL(e.newURL).hash
@@ -57,6 +30,7 @@ window.icons = {
   "upload": await (await fetch("/img/upload.svg")).text(),
   "video-file": await(await fetch("/img/video-file.svg")).text(),
   "wallet": await(await fetch("/img/wallet.svg")).text(),
+  "image": await(await fetch("/img/image.svg")).text(),
 }
 
 // component imports
@@ -64,7 +38,7 @@ window.icons = {
 // app
 import("./components/app/nav/bar.js")
 import("./components/app/nav/dropdown.js")
-import("./components/app/create-video.js")
+import("./components/app/upload.js")
 import("./components/app/teaser.js")
 // generic
 import("./components/generic/button.js")
@@ -78,3 +52,34 @@ import("./components/generic/tabs.js")
 import("./components/generic/text-input.js")
 import("./components/generic/textarea.js")
 import("./components/generic/toast.js")
+
+export const routes = [
+  {
+    path: "",
+    component: "at-browse",
+    action: async() => await import("./components/app/browse.js")
+  },
+  {
+    path: "upload",
+    component: "at-upload",
+    action: async() => await import("./components/app/upload.js")
+  },
+  {
+    path: "channel/:address",
+    component: "at-channel",
+    action: async() => await import("./components/app/channel.js")
+  },
+  {
+    path: "watch/:videotxid",
+    component: "at-watch",
+    action: async() => await import("./components/app/watch.js")
+  },
+  {
+    path: "connect-wallet",
+    action: connectWallet
+  },
+  {
+    path: "disconnect-wallet",
+    action: disconnectWallet
+  }
+]

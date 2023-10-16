@@ -15,15 +15,15 @@ export function fmtDate(date) {
 export function fmtSize(bytes) {
   const kB = Math.floor(bytes/1000)
   if (kB < 1) {
-    return `${bytes}B`
+    return `${bytes} B`
   }
   const MB = Math.floor(bytes/1000000)
   if (MB < 1) {
-    return `${kB}kB`
+    return `${kB} kB`
   }
   const GB = bytes/1000000000
   if (GB < 1) {
-    return `${MB}MB`
+    return `${MB} MB`
   }
   return `${GB.toFixed(2)}GB`
 }

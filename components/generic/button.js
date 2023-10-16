@@ -7,7 +7,7 @@ export class Button extends LitElement {
       button {
         border: 2px solid var(--accent-light-color-1);
         border-radius: 5px;
-        background: var(--background-gradient);
+        background-color: var(--dark-color);
         cursor: pointer;
         color: var(--light-color-2);
         display: flex;
@@ -25,7 +25,6 @@ export class Button extends LitElement {
 
       button:hover:not([disabled]) {
         background-color: var(--signal-color-1);
-        border-color: var(--signal-color-2);
       }
 
       button[disabled] {

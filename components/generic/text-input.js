@@ -16,7 +16,7 @@ class TextInput extends LitElement {
   }
 
   input::placeholder {
-    color: var(--light-color-2);
+    color: var(--light-color-4);
   }
   
   input:hover:not(:focus) {

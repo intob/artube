@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit"
+import { LitElement, css, html } from "lit"
 import { map } from "lit/directives/map.js"
 import { getVideos } from "../../util/query/video.js"
 
@@ -6,6 +6,14 @@ class Browse extends LitElement {
   constructor() {
     super()
   }
+
+  static styles = css`
+  :host {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  `
 
   static properties = {
     videos: {}

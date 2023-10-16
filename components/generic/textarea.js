@@ -26,6 +26,8 @@ class Textarea extends LitElement {
   }
 
   textarea:focus {
+    outline: none;
+    border-color: var(--signal-color-1);
     color: var(--light-color-1);
   }
   `

@@ -1,6 +1,7 @@
 import { html, css, LitElement } from "lit"
 import { renderIcon } from "../../../util/icon.js"
 import { shortenId } from "../../../util/format.js"
+import { getWalletAddress } from "../../../util/wallet.js"
 
 class NavBar extends LitElement {
 
@@ -53,18 +54,21 @@ class NavBar extends LitElement {
   
   constructor() {
     super()
-    this.getWalletAddress()
+    this.setWalletAddress()
   }
 
   async connectedCallback() {
     super.connectedCallback()
-    this.getWalletAddress = this.getWalletAddress.bind(this)
-    window.addEventListener("at-wallet-connected", this.getWalletAddress)
+    this.setWalletAddress = this.setWalletAddress.bind(this)
+    window.addEventListener("at-wallet-connected", this.setWalletAddress)
+    this.clearWalletAddress = this.clearWalletAddress.bind(this)
+    window.addEventListener("at-wallet-disconnected", this.clearWalletAddress)
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    window.removeEventListener("at-wallet-connected", this.getWalletAddress)
+    window.removeEventListener("at-wallet-connected", this.setWalletAddress)
+    window.removeEventListener("at-wallet-disconnected", this.clearWalletAddress)
   }
   
   render() {
@@ -76,12 +80,6 @@ class NavBar extends LitElement {
       </x-link>
       <x-link href="#/">Home</x-link>
       <x-link href="#/channel/${this.walletAddress||""}" ?hidden=${!this.walletAddress}>My channel</x-link>
-      <x-link href="#/create-video" ?hidden=${!this.walletAddress}>Create video</x-link>
-      <!--<nav-dropdown>
-        <span slot="parent">Dropdown</span>
-        <x-link slot="child" href="#/tags/author">Author</x-link>
-        <x-link slot="child" href="#/tags/beat">Beat</x-link>
-      </nav-dropdown>-->
     </div>
     <div class="right">
       ${this.renderConnection()}
@@ -96,15 +94,20 @@ class NavBar extends LitElement {
       `
     }
     return html`
-    <span>${shortenId(this.walletAddress)}</span>
+    <nav-dropdown>
+      <span slot="parent">${shortenId(this.walletAddress)}</span>
+      <x-link slot="child" href="#/upload" ?hidden=${!this.walletAddress}>Upload</x-link>
+      <x-link slot="child" href="#/disconnect-wallet">Disconnect</x-link>
+    </nav-dropdown>
     `
   }
 
-  async getWalletAddress() {
-    if (!window.arweaveWallet) {
-      return
-    }
-    this.walletAddress = await window.arweaveWallet.getActiveAddress()
+  async setWalletAddress() {
+    this.walletAddress = await getWalletAddress()
+  }
+
+  clearWalletAddress() {
+    this.walletAddress = null
   }
 }
 customElements.define("nav-bar", NavBar, { extends: "nav" })

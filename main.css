@@ -1,11 +1,11 @@
 :root {
   --dark-color: #0C0910;
   --dark-color2: #1D1627;
-  --light-color-1: #efefef;
-  --light-color-2: #e3e3e3;
-  --light-color-3: #c8c8c8;
-  --light-color-4: #a8a8a8;
-  --accent-dark-color: #1f1f1f;
+  --light-color-1: #FAFFFD;
+  --light-color-2: #E3E3E3;
+  --light-color-3: #C8C8C8;
+  --light-color-4: #A8A8A8;
+  --accent-dark-color: #1F1F1F;
   --accent-light-color-1: #818181;
   --accent-light-color-2: #434343;
   --lighten-color-1: rgba(255,255,255,.1);
@@ -15,6 +15,7 @@
   --darken-color-3: rgba(0,0,0,.9);
   --signal-color-1: #2F52E0;
   --signal-color-2: #F24236;
+  --signal-color-3: #A2D729;
   --background-gradient: linear-gradient(.25turn, var(--dark-color), var(--dark-color2))
 }
   

@@ -36,6 +36,7 @@ class Teaser extends LitElement {
 
   .poster {
     width: 50%;
+    min-width: 50%;
     border-radius: 10px 0 0 10px;
     object-fit: cover;
     transition: filter 300ms;
@@ -94,7 +95,7 @@ class Teaser extends LitElement {
       <img src=${this.posterUrl} class="poster"/>
       <div class="info">
         <h2>${this.metadata?.title}</h2>
-        <p>${this.metadata?.description}</p>
+        <p>${this.metadata?.description.slice(0, 200)}${this.metadata?.description.length > 200 ? " ..." : ""}</p>
         <div class="channel">
           <img src=${this.avatarUrl} class="avatar"/>
           <span ?hidden=${!this.channel}>${this.channel?.name}</span>
