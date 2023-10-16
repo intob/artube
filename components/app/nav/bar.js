@@ -79,7 +79,6 @@ class NavBar extends LitElement {
           <span>ArTube</span>
       </x-link>
       <x-link href="#/">Home</x-link>
-      <x-link href="#/channel/${this.walletAddress||""}" ?hidden=${!this.walletAddress}>My channel</x-link>
       <x-link href="#/what">ar what?</x-link>
     </div>
     <div class="right">
@@ -97,6 +96,7 @@ class NavBar extends LitElement {
     return html`
     <nav-dropdown>
       <span slot="parent">${shortenId(this.walletAddress)}</span>
+      <x-link slot="child" href="#/channel/${this.walletAddress||""}" ?hidden=${!this.walletAddress}>Your channel</x-link>
       <x-link slot="child" href="#/upload" ?hidden=${!this.walletAddress}>Upload</x-link>
       <x-link slot="child" href="#/disconnect-wallet">Disconnect</x-link>
     </nav-dropdown>

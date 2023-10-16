@@ -2,7 +2,6 @@ import { html, css, LitElement } from "lit"
 
 class NavDropdown extends LitElement {
   static styles = css`
-
   slot[name="child"] {
     flex-direction: column;
     position: absolute;
@@ -27,6 +26,12 @@ class NavDropdown extends LitElement {
 
   div:hover slot[name="child"] {
     display: flex;
+  }
+
+  @media(max-width:1300px) {
+    slot[name="child"] {
+      right: 20px;
+    }
   }
   `
 
