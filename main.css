@@ -58,11 +58,11 @@ x-loader, x-toast, x-notify {
   z-index: 1;
 }
 
-x-router, nav {
+x-router, nav-bar {
   padding: 20px;
 }
 
-x-router, nav, x-loader {
+x-router, nav-bar, x-loader {
   width: 100vw;
   max-width: 1200px;
   box-sizing: border-box;

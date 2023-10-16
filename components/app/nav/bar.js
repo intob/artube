@@ -111,4 +111,4 @@ class NavBar extends LitElement {
     this.walletAddress = null
   }
 }
-customElements.define("nav-bar", NavBar, { extends: "nav" })
+customElements.define("nav-bar", NavBar)
