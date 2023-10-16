@@ -79,17 +79,27 @@ class Teaser extends LitElement {
   async connectedCallback() {
     super.connectedCallback()
     const metadataTx = await getVideoMetadataTx(this.videotxid)
+    if (!metadataTx) {
+      return
+    }
     this.metadata = await (await fetchData(metadataTx.id)).json()
     const posterTxId = await getVideoPosterTxId(this.videotxid)
-    this.posterUrl = buildDataUrl(posterTxId)
+    if (posterTxId) {
+      this.posterUrl = buildDataUrl(posterTxId)
+    }
     if (this.channeladdress) {
       this.channel = await this.getChannel()
       const avatarTxId = await getChannelAvatarTxId(metadataTx.owner.address)
-      this.avatarUrl = buildDataUrl(avatarTxId)
+      if (avatarTxId) {
+        this.avatarUrl = buildDataUrl(avatarTxId)
+      }
     }
   }
 
   render() {
+    if (!this.metadata || this.posterUrl === "") {
+      return
+    }
     return html`
     <x-card @click=${() => window.location = `#/watch/${this.videotxid}`}>
       <img src=${this.posterUrl} class="poster"/>

@@ -165,10 +165,23 @@ class Upload extends LitElement {
       Toast.notify("Nothing happened")
       return
     }
-    const videoTxId = await this.uploadVideo()
-    await this.uploadMetadata(videoTxId)
-    await this.uploadPoster(videoTxId)
-    Toast.notify("Done")
+    try {
+      if (!this.metadata.title || this.metadata.title === "") {
+        throw "A title must be given"
+      }
+      if (!this.videoFile) {
+        throw "No video file selected"
+      }
+      if (!this.posterFile) {
+        throw "No poster image selected"
+      }
+      const videoTxId = await this.uploadVideo()
+      await this.uploadMetadata(videoTxId)
+      await this.uploadPoster(videoTxId)
+      Toast.notify("Done")
+    } catch (e) {
+      Toast.notify("Upload failed", { msg: e })
+    }
   }
 
   async uploadVideo() {

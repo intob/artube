@@ -4,9 +4,10 @@ import { getVideos } from "../../util/query/video.js"
 import { getChannelAvatarTxId, getChannelTxId } from "../../util/query/channel.js"
 import { buildDataUrl, fetchData } from "../../util/gateway/data.js"
 import { getWalletAddress } from "../../util/wallet.js"
-import { shortenId } from "../../util/format.js"
+import { fmtSize, shortenId } from "../../util/format.js"
 import { Toast } from "../generic/toast.js"
 import { Loader } from "../generic/loader.js"
+import { readFileAsArrayBuffer } from "../../util/file.js"
 
 class Channel extends LitElement {
   constructor() {
@@ -23,7 +24,8 @@ class Channel extends LitElement {
     channel: {},
     videos: {},
     avatarUrl: {},
-    editMode: { type: Boolean }
+    editMode: { type: Boolean },
+    newAvatarFile: {}
   }
 
   static styles = css`
@@ -36,6 +38,7 @@ class Channel extends LitElement {
   header {
     display: flex;
     gap: 40px;
+    align-items: flex-start;
   }
 
   .details {
@@ -58,6 +61,12 @@ class Channel extends LitElement {
   .buttons {
     display: flex;
     justify-content: flex-end;
+    gap: 20px;
+  }
+
+  .avatar-select {
+    display: flex;
+    align-items: center;
     gap: 20px;
   }
 
@@ -112,6 +121,12 @@ class Channel extends LitElement {
       <h1>${this.channel.name}</h1>
       <text-input placeholder="Channel Name" @input=${this.handleNameChange} .value=${this.channel.name}></text-input>
       <text-input placeholder="Channel description" @input=${this.handleDescriptionChange} .value=${this.channel.description}></text-input>
+      <div class="avatar-select">
+        <span>Poster image</span>
+        <file-input @change=${e => this.newAvatarFile = e.detail.files[0]} accept="image/jpeg,image/png,image/webp"></file-input>
+        <span ?hidden=${!this.newAvatarFile}>${this.newAvatarFile?.name}</span>
+        <span ?hidden=${!this.newAvatarFile}>${fmtSize(this.newAvatarFile?.size)}</span>
+      </div>
       <div class="buttons">
         <x-button @click=${this.cancel}>Cancel</x-button>
         <x-button @click=${this.save}>Save</x-button>
@@ -143,6 +158,15 @@ class Channel extends LitElement {
       this.updatedChannel = { ...this.channel }
       return
     }
+    await this.uploadChannelJson()
+    await this.uploadNewAvatar()
+  }
+
+  async uploadChannelJson() {
+    if (this.channel.name === this.updatedChannel.name &&
+      this.channel.description === this.updatedChannel.description) {
+      return
+    }
     let tx = await window.arweave.createTransaction({
       data: JSON.stringify(this.updatedChannel)
     })
@@ -154,6 +178,25 @@ class Channel extends LitElement {
       Loader.setProgress(tx.id, uploader.pctComplete/100)
     }
     Toast.notify("Changes saved")
+  }
+
+  async uploadNewAvatar() {
+    if (!this.newAvatarFile) {
+      return
+    }
+    const buf = await readFileAsArrayBuffer(this.newAvatarFile)
+    let tx = await window.arweave.createTransaction({
+      data: buf
+    })
+    tx.addTag("Content-Type", this.newAvatarFile.type)
+    tx.addTag("App-Name", "artube")
+    tx.addTag("Artube-Type", "avatar")
+    await window.arweave.transactions.sign(tx)
+    for await (const uploader of window.arweave.transactions.upload(tx)) {
+      Loader.setProgress(tx.id, uploader.pctComplete/100)
+    }
+    Toast.notify("Uploaded avatar")
+    this.newAvatarFile = null
   }
 
   handleDescriptionChange(e) {
