@@ -1,34 +1,64 @@
-# Toolbox
-This is the frontend for various internal tools. It's a static web app, built using native Web Components.
+# Artube
+This is the original client (reference implementation) that allows anyone to browse videos uploaded to the Arweave network using the schema defined below.
 
-## Local development
-### 1. Run local init script
-This downloads dependencies & copies them into `/dist`. This is required due to build optimisations in `buildspec.yml`. Only required `node_modules` are copied into `/dist` during deployment.
-```bash
-yarn run init-local
+Any client can be built that interoperates with this one, as long as the same schema is followed.
+
+Host this yourself, or go to artube.pages.dev, it doesn't matter.
+
+To add content, either connect a browser wallet (such as ArConnect), or manually create the transaction using the schema defined below.
+
+## Metadata
+### JSON Schema
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "App-Name": {
+      "type": "string"
+    },
+    "Artube-Type": {
+      "type": "string",
+      "enum": [ "video", "poster", "metadata", "channel" ]
+    },
+    "Artube-Video": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "App-Name",
+    "Artube-Type"
+  ]
+}
 ```
 
-### 2. Create env.js
-In the repository root, create a file called env.js. The following constants must be exported:
+### Types
+#### video
+https://arweave.app/tx/PbXQqLmMPueNORJVG-0FOizaCYOneOZ45iLAEpx9Ww0
+
+#### poster
+A poster image for a video. Normally, a client will display the latest one.
+
+When querying the network for the poster, the client must enusre that only poster images owned by the video uploader address are evaluated. Otherwise, anyone can overwrite the poster image by uploading a file with the same `Artube-Video` reference.
+
+https://arweave.app/tx/iVxqvkXinECcFsM5qDQtZKckv2rjZT0ldADB9g1YNmA
+
+#### metadata
+JSON object with the following structure:
+```json
+{
+  "title": "Speedflying my dream lines of Chamonix",
+  "description": "Thank you to all of the beautiful people in my life. Mucho love"
+}
 ```
-// URLs must not end with "/"
-export const apiOrigin = "https://api.dev.swi-services.ch"
-export const cognitoOrigin = "https://swi-auth-dev.auth.eu-central-1.amazoncognito.com"
-export const cognitoClientId = "XXXX"
-export const cdnOrigin = "https://cdn.dev.swi-services.ch"
+https://arweave.app/tx/3h4y-c0FxDjKJPBHi_ze7PUoYiW3hVmjjoqh6hbRfJY
+
+#### channel
+JSON object with the following structure:
+```json
+{
+  "name": "Joey Innes",
+  "description": "Spreading love & flying fast 🤍 🚀 🌱"
+}
 ```
-### 3. Start local webserver
-```bash
-yarn start
-```
-
-## Use VSCode
-I recommend that you use VSCode for this project.
-
-VSCode performs much better than most other editors. For web dev, nothing else is required. All the relevant settings & extensions are integrated into the project workspace under `.vscode`.
-
-The following enhancements are configured:
-- Automatic linting on save
-- Support for Lit (template syntax highlighting)
-
-Both of these plugins perform very well, so the editing experience is not damaged.
+https://arweave.app/tx/8s-AOLGM6xNijqIgzffjwRxDaHGyKj6mVjq207NK-XM
