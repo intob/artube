@@ -49,7 +49,7 @@ class NavBar extends LitElement {
   ]
 
   static properties = {
-    walletAddress: {}
+    walletAddress: {},
   }
   
   constructor() {
@@ -80,6 +80,7 @@ class NavBar extends LitElement {
       </x-link>
       <x-link href="#/">Home</x-link>
       <x-link href="#/what">ar what?</x-link>
+      <text-input placeholder="Search" @change=${this.handleSearch}></text-input>
     </div>
     <div class="right">
       ${this.renderConnection()}
@@ -101,6 +102,10 @@ class NavBar extends LitElement {
       <x-link slot="child" href="#/disconnect-wallet">Disconnect</x-link>
     </nav-dropdown>
     `
+  }
+
+  handleSearch(e) {
+    window.location = `#/search/${e.detail.value}`
   }
 
   async setWalletAddress() {

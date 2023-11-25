@@ -85,6 +85,7 @@ class Channel extends LitElement {
     }
     this.isOwn = this.address === await getWalletAddress()
     this.videos = await getVideos(this.address)
+    console.log(this.videos)
     const channelTxId = await getChannelTxId(this.address)
     if (channelTxId) {
       this.channel = await (await fetchData(channelTxId)).json()
@@ -136,7 +137,7 @@ class Channel extends LitElement {
 
   renderTeaser(v) {
     return html`
-      <at-teaser videotxid=${v.id}></at-teaser>
+      <at-video-teaser videotxid=${v.id} address=${this.address}></at-video-teaser>
     `
   }
 

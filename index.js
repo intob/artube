@@ -14,7 +14,9 @@ if (window.arweaveWallet) {
   }
 }
 
-window.arweave = window.Arweave.init(gateway)
+if (window.Arweave) {
+  window.arweave = window.Arweave.init(gateway)
+}
 
 // persist route in session
 addEventListener("hashchange", e => {
@@ -39,7 +41,8 @@ window.icons = {
 import("./components/app/nav/bar.js")
 import("./components/app/nav/dropdown.js")
 import("./components/app/upload.js")
-import("./components/app/teaser.js")
+import("./components/app/video-teaser.js")
+import("./components/app/channel-teaser.js")
 // generic
 import("./components/generic/button.js")
 import("./components/generic/card.js")
@@ -73,6 +76,11 @@ export const routes = [
     path: "watch/:videotxid",
     component: "at-watch",
     action: async() => await import("./components/app/watch.js")
+  },
+  {
+    path: "search/:query",
+    component: "at-search",
+    action: async() => await import("./components/app/search.js")
   },
   {
     path: "what",

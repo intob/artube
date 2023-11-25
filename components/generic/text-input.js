@@ -53,6 +53,7 @@ class TextInput extends LitElement {
   render() {
     return html`
     <input @input=${this.handleInput}
+        @change=${this.handleChange}
         type="${this.type}"
         placeholder="${this.placeholder}"
         autocomplete="off"
@@ -67,6 +68,17 @@ class TextInput extends LitElement {
     e.stopPropagation()
     this.value = e.target.value
     this.dispatchEvent(new CustomEvent("input", {
+      bubbles: false,
+      detail: {
+        value: e.target.value
+      }
+    }))
+  }
+
+  handleChange(e) {
+    e.stopPropagation()
+    this.value = e.target.value
+    this.dispatchEvent(new CustomEvent("change", {
       bubbles: false,
       detail: {
         value: e.target.value
